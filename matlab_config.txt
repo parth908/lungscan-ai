@@ -1,0 +1,2 @@
+MATLAB_EXE=C:\Program Files\MATLAB\R2022a\bin\matlab.exe
+RUNNER_M=C:\Users\Parth\Downloads\TK54596\CODE\runner.m

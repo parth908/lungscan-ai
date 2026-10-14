@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>LungScan AI Research</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1120;--panel:#121c2e;--panel2:#18243a;--text:#f3f6fc;--muted:#aab7ce;--line:#2a3952;--accent:#66e3c4;--blue:#7aa7ff;--warn:#ffd48a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#1b3150 0,#0b1120 45%);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);min-height:100vh}
+main{max-width:920px;margin:auto;padding:24px 16px 48px}.brand{display:flex;gap:12px;align-items:center;margin-bottom:24px}.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#66e3c4,#7aa7ff);color:#081323;font-size:24px;font-weight:900}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:800}.brand h1{font-size:22px;margin:2px 0}.brand p{margin:0;color:var(--muted);font-size:13px}
+.hero{padding:24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(30,49,77,.96),rgba(18,28,46,.96));margin-bottom:18px}.hero h2{font-size:clamp(25px,5vw,38px);line-height:1.12;margin:8px 0 12px;max-width:680px}.hero p{color:var(--muted);max-width:650px;line-height:1.6;margin:0}.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid #3c536e;border-radius:999px;padding:6px 10px;font-size:12px;color:#dce9f9}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.panel{background:rgba(18,28,46,.94);border:1px solid var(--line);border-radius:20px;padding:18px;min-width:0}.panel h3{margin:0 0 5px;font-size:17px}.sub{color:var(--muted);font-size:13px;line-height:1.45;margin:0 0 14px}.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:185px;border:1px dashed #49617e;border-radius:15px;padding:16px;background:#0e1728;cursor:pointer;overflow:hidden}.drop:focus-within,.drop:hover{border-color:var(--accent)}.uploadicon{font-size:28px;margin-bottom:8px}.drop strong{font-size:14px}.drop small{color:var(--muted);margin-top:5px}.drop input{max-width:100%;margin-top:12px;font-size:12px;color:var(--muted)}.preview{display:none;width:100%;max-height:220px;object-fit:contain;margin-top:12px;border-radius:10px;background:#050914}.actions{display:flex;gap:12px;align-items:center;margin:16px 0}.btn{border:0;border-radius:14px;padding:14px 18px;font-size:15px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#071820;flex:1}.secondary{background:#24334b;color:var(--text)}.btn:disabled{opacity:.55;cursor:wait}.status{display:none;border:1px solid var(--line);background:#111c2d;padding:14px;border-radius:14px;margin:14px 0;line-height:1.5}.status.error{border-color:#7b444b;color:#ffd5d8}.status.good{border-color:#2f756a;color:#c9fff2}.results{display:none;margin-top:18px}.results h2{font-size:22px;margin:0 0 12px}.resultimg{width:100%;max-height:520px;object-fit:contain;background:#050914;border:1px solid var(--line);border-radius:14px}.resulttext{white-space:pre-wrap;line-height:1.55;color:#e5edf9}.note{font-size:12px;line-height:1.55;color:var(--muted);margin-top:18px;padding:14px;border-left:3px solid var(--warn);background:rgba(255,212,138,.06);border-radius:0 10px 10px 0}.footer{text-align:center;color:#7f91ac;font-size:12px;margin-top:24px}
+@media(max-width:620px){main{padding:18px 12px 32px}.grid{grid-template-columns:1fr}.hero{padding:20px}.drop{min-height:160px}.actions{flex-direction:column}.actions .btn{width:100%}.brand h1{font-size:19px}}
+</style>
+</head>
+<body>
+<main>
+  <header class="brand"><div class="logo">L+</div><div><div class="eyebrow">Research prototype</div><h1>LungScan AI</h1><p>CT + PET scan analysis interface</p></div></header>
+  <section class="hero">
+    <span class="chip">● MATLAB-connected workflow</span>
+    <h2>Medical image analysis, from your phone.</h2>
+    <p>Select a CT image and a PET image. This app sends both to your laptop for analysis by your existing MATLAB research workflow.</p>
+  </section>
+  <form id="uploadForm">
+    <div class="grid">
+      <section class="panel">
+        <h3>01 · CT scan</h3><p class="sub">Choose a CT image file.</p>
+        <label class="drop" for="ct_scan"><span class="uploadicon">▧</span><strong>Select CT image</strong><small>PNG, JPG, BMP or TIFF</small><input id="ct_scan" name="ct_scan" type="file" accept=".png,.jpg,.jpeg,.bmp,.tif,.tiff,image/*" required><img class="preview" id="ctPreview" alt="CT scan preview"></label>
+      </section>
+      <section class="panel">
+        <h3>02 · PET scan</h3><p class="sub">Choose the corresponding PET image.</p>
+        <label class="drop" for="pet_scan"><span class="uploadicon">▧</span><strong>Select PET image</strong><small>PNG, JPG, BMP or TIFF</small><input id="pet_scan" name="pet_scan" type="file" accept=".png,.jpg,.jpeg,.bmp,.tif,.tiff,image/*" required><img class="preview" id="petPreview" alt="PET scan preview"></label>
+      </section>
+    </div>
+    <div class="actions"><button class="btn primary" id="analyzeBtn" type="submit">Upload scans &amp; analyse →</button><button class="btn secondary" type="reset">Clear selection</button></div>
+  </form>
+  <div class="status" id="statusBox" role="status" aria-live="polite"></div>
+  <section class="panel results" id="resultsPanel">
+    <h2>Analysis output</h2>
+    <p class="sub" id="jobLabel"></p>
+    <img class="resultimg" id="resultImage" alt="MATLAB analysis result" style="display:none">
+    <div class="resulttext" id="resultText"></div>
+  </section>
+  <div class="note"><strong>Research use only.</strong> This prototype is not a medical diagnostic device. Results must not be used to diagnose or rule out cancer; consult a qualified medical professional. Upload only images you are authorized to use. The initial setup is intended for a trusted local Wi-Fi network, not public internet access.</div>
+  <div class="footer">LungScan AI · Mobile research interface</div>
+</main>
+<script>
+const form=document.getElementById('uploadForm'),statusBox=document.getElementById('statusBox'),btn=document.getElementById('analyzeBtn');
+function preview(inputId,imgId){const input=document.getElementById(inputId),img=document.getElementById(imgId);input.addEventListener('change',()=>{const file=input.files&&input.files[0];if(!file){img.removeAttribute('src');img.style.display='none';return;}img.src=URL.createObjectURL(file);img.style.display='block';});}
+preview('ct_scan','ctPreview');preview('pet_scan','petPreview');
+function status(message,kind=''){statusBox.textContent=message;statusBox.className='status '+kind;statusBox.style.display='block';}
+form.addEventListener('reset',()=>{setTimeout(()=>{document.querySelectorAll('.preview').forEach(i=>{i.style.display='none';i.removeAttribute('src')});statusBox.style.display='none';document.getElementById('resultsPanel').style.display='none';},0)});
+form.addEventListener('submit',async e=>{e.preventDefault();const ct=document.getElementById('ct_scan').files[0],pet=document.getElementById('pet_scan').files[0];if(!ct||!pet){status('Please choose both scan images.','error');return;}if(ct.size+pet.size>25*1024*1024){status('The combined upload is too large. Please use images under 25 MB total.','error');return;}
+btn.disabled=true;btn.textContent='Processing…';document.getElementById('resultsPanel').style.display='none';status('Uploading both scans to your laptop…');
+try{const response=await fetch('/api/analyze',{method:'POST',body:new FormData(form)});const data=await response.json();if(!response.ok){status(data.error||'Analysis could not be completed.','error');return;}status(data.message||'Analysis complete.','good');document.getElementById('resultsPanel').style.display='block';document.getElementById('jobLabel').textContent='Job ID: '+data.job_id;const img=document.getElementById('resultImage');if(data.result_image){img.src=data.result_image+'?t='+Date.now();img.style.display='block';}else{img.style.display='none';}document.getElementById('resultText').textContent=data.result_text||'';if(!data.result_image&&!data.result_text)document.getElementById('resultText').textContent=data.message||'No result file was returned.';document.getElementById('resultsPanel').scrollIntoView({behavior:'smooth'});}
+catch(err){status('Cannot reach the laptop server. Confirm the server is running and both devices are on the same Wi-Fi.','error');}
+finally{btn.disabled=false;btn.textContent='Upload scans & analyse →';}
+});
+</script>
+</body></html>

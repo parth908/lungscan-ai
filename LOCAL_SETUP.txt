@@ -1,0 +1,67 @@
+LUNGSCAN AI — LOCAL SETUP (Windows, MATLAB R2022a/R2022b)
+===========================================================
+
+WHAT THIS PACKAGE DOES
+- Provides the mobile-friendly upload interface and a Python/Flask server.
+- Accepts CT and PET image files and previews them.
+- Includes a safe placeholder integration point for your existing MATLAB code.
+- It does NOT contain or simulate your trained model. The actual MATLAB integration
+  requires a small local edit to your existing code, which stays on your laptop.
+
+STEP 1 — Install Python if needed
+Install Python 3.10 or 3.11 from https://www.python.org/downloads/
+During installation, check "Add Python to PATH".
+
+STEP 2 — Install requirements
+Open Command Prompt in this folder and run:
+    py -m pip install -r requirements.txt
+
+STEP 3 — Start the upload app
+    py app.py
+Keep this window open. On the laptop, open:
+    http://127.0.0.1:5000
+Find your laptop's local IPv4 address by opening a second Command Prompt and running:
+    ipconfig
+Look for "IPv4 Address" under the Wi-Fi adapter. On your phone, while connected to the
+same trusted Wi-Fi, open:
+    http://YOUR-LAPTOP-IP:5000
+Example format: http://192.168.1.25:5000
+The actual address will differ. If Windows Firewall asks, allow Python only on a private
+network that you trust. Do not expose port 5000 directly to the internet.
+
+STEP 4 — Connect MATLAB (do this after confirming the app opens)
+This app deliberately does not guess your existing MATLAB function names. The current
+workflow uses uigetfile to ask for CT and PET files. For automation, the relevant code
+must accept file paths from environment variables instead.
+
+The server launches MATLAB in batch mode and passes:
+    LUNG_CT_PATH
+    LUNG_PET_PATH
+    LUNG_RESULT_DIR
+    LUNG_JOB_ID
+
+Your local MATLAB adapter/runner must read those values, call your existing model logic,
+and save:
+    <LUNG_RESULT_DIR>\<LUNG_JOB_ID>_result.png
+and/or
+    <LUNG_RESULT_DIR>\<LUNG_JOB_ID>_result.txt
+
+Create a file named matlab_config.txt in this folder with two lines, for example:
+MATLAB_EXE=C:\Program Files\MATLAB\R2022b\bin\matlab.exe
+RUNNER_M=C:\YOUR\LOCAL\PATH\runner.m
+
+Replace the example paths with the actual paths on your laptop. The MATLAB executable path
+varies by installation. The runner.m path is a MATLAB script you create locally to call
+your existing code. The exact adapter cannot be written reliably until you inspect the
+few lines around your existing uigetfile calls and how the output is generated. You do not
+need to upload the code; you can share only those few lines if you feel comfortable, or
+edit them privately using these instructions.
+
+IMPORTANT:
+- Do not put real patient-identifying information in filenames.
+- Use images only if you have permission to process them.
+- This is a research prototype, not a medical diagnostic device.
+- Do not use real patient data over an untrusted network.
+- The server currently accepts standard image files only; full DICOM series support is not
+  included.
+- The upload is limited to 25 MB total per request by this starter app.

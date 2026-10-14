@@ -1,0 +1,22 @@
+LungScan AI research prototype results
+--------------------------------------
+Status: processing uploaded images
+
+Image fusion: completed
+Fused image: C:\Users\Parth\Documents\project\results\20261014_102801_80332c44_result.png
+
+CNN classification: starting
+CNN predicted class: ABNORMAL
+CNN class scores (model outputs, not clinically validated probabilities):
+  ABNORMAL: 1.000000
+  NORMAL: 0.000000
+Final recorded training accuracy: 100.00% (training metric, not prediction confidence)
+
+YOLOv2 detection: completed
+Annotated detection image: C:\Users\Parth\Documents\project\results\20261014_102801_80332c44_detection.png
+Number of detected boxes: 1
+Detection scores:
+  Box 1: 0.809587
+
+Important: This is an experimental research output, not a medical diagnosis.
+The CNN is trained on the supplied dataset during each run; processing may take several minutes.

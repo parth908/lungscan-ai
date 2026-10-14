@@ -1,0 +1,4 @@
+CT image loaded and resized successfully.
+PET image loaded and resized successfully.
+Fused image created successfully.
+This is an image-fusion result, not a cancer diagnosis.

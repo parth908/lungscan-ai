@@ -1,0 +1,22 @@
+LungScan AI Research Results
+============================
+
+Image fusion: completed
+Initial fused image: C:\Users\Parth\Documents\project\results\20261014_104416_210adfce_result.png
+
+CNN training: started
+CNN classification: completed
+Predicted dataset class: ABNORMAL
+
+CNN output scores (not clinically validated):
+ABNORMAL: 1.000000
+NORMAL: 0.000000
+Final training accuracy metric: 100.00%
+
+YOLOv2 detection: completed
+Number of detected boxes: 1
+Annotated image saved: C:\Users\Parth\Documents\project\results\20261014_104416_210adfce_detection.png
+Box 1: label=data_infection (91.0%), score=0.910301, x=177.0, y=299.0, width=54.0, height=69.0
+
+Main result image: C:\Users\Parth\Documents\project\results\20261014_104416_210adfce_result.png
+This is an experimental research output, not a diagnosis.

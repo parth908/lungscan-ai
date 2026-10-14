@@ -1,0 +1,3 @@
+# Copy this file to matlab_config.txt and replace paths with your actual local paths.
+MATLAB_EXE=C:\Program Files\MATLAB\R2022a\bin\matlab.exe
+RUNNER_M=C:\path\to\your\runner.m
